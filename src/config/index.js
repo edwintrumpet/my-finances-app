@@ -1,3 +1,3 @@
 export default {
-  appName: process.env.APP_NAME || 'app'
-}
+  appName: process.env.APP_NAME || 'app',
+};
