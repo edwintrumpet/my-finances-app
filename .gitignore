@@ -1,0 +1,13 @@
+# React
+node_modules
+
+# Production
+dist
+modules-manifest.json
+
+# Environment
+.env
+.env.dev
+
+# MacOs
+.DS_Store
