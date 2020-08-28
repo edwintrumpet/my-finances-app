@@ -32,4 +32,4 @@ jobs:
       - name: Build
         run: npm run build
       - name: Deploy
-        run: npm run deploy:qa -- -r github@github.com:edwintrumpet/my-finances-app
+        run: npm run deploy:qa -- -r git@github.com:edwintrumpet/my-finances-app
