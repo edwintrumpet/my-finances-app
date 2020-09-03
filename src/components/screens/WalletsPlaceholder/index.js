@@ -1,8 +1,11 @@
 import React from 'react';
+import { func } from 'prop-types';
 import { Formik } from 'formik';
+import { connect } from 'react-redux';
 import * as Yup from 'yup';
 import { MenuItem } from '@material-ui/core';
 
+import { createWallet } from '../../../redux/actions';
 import currencies from '../../../utils/currencies.json';
 import {
   Button,
@@ -31,17 +34,15 @@ const validationSchema = Yup.object().shape({
 
 const username = 'Lorena';
 
-export default function WalletsPlaceholder() {
+function WalletsPlaceholder(props) {
   const classes = useStyles();
 
   const title = `¡Hola ${username}!`;
   const subtitle = 'Crea tu primera billetera';
 
   const handleSend = (values, { setSubmitting }) => {
-    setTimeout(() => {
-      console.log(values);
-      setSubmitting(false);
-    }, 5000);
+    props.createWallet(values);
+    setSubmitting(false);
   };
 
   const currencyOptions = () => Object.keys(currencies).map((element) => (
@@ -131,3 +132,13 @@ export default function WalletsPlaceholder() {
     </Formik>
   );
 }
+
+WalletsPlaceholder.propTypes = {
+  createWallet: func.isRequired,
+};
+
+const mapDispatchToProps = {
+  createWallet,
+};
+
+export default connect(null, mapDispatchToProps)(WalletsPlaceholder);

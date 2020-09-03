@@ -6,6 +6,10 @@ module.exports = {
     modules: [
       'react',
       'react-dom',
+      'react-redux',
+      'redux',
+      'redux-thunk',
+      '@material-ui/core',
     ],
   },
   output: {
