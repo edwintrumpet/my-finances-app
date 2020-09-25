@@ -10,13 +10,14 @@ export default function ShowErrorsForm({
   errors,
   initialValues,
   touched,
+  values,
 }) {
   const classes = useStyles();
 
   const showTransition = (element) => (
     <Transition
       key={element}
-      in={(errors[element] && touched[element])}
+      in={(element !== 'confirmPassword' && errors[element] && touched[element])}
       timeout={300}
     >
       {(state) => (
@@ -37,6 +38,20 @@ export default function ShowErrorsForm({
   return (
     <div className={classes.errors}>
       {iterateErrors()}
+      <Transition
+        in={touched.confirmPassword && values.password !== values.confirmPassword}
+        timeout={300}
+      >
+        {(state) => (
+          <Typography
+            style={{ ...defaultStyle, ...transitionStyles[state] }}
+            customization={classes.itemError}
+            variant="caption"
+          >
+            Las contraseñas no coinciden
+          </Typography>
+        )}
+      </Transition>
     </div>
   );
 }
@@ -45,10 +60,12 @@ ShowErrorsForm.propTypes = {
   errors: shape(),
   initialValues: shape(),
   touched: shape(),
+  values: shape(),
 };
 
 ShowErrorsForm.defaultProps = {
   errors: {},
   initialValues: {},
   touched: {},
+  values: {},
 };
