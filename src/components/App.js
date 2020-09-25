@@ -1,15 +1,26 @@
 import React from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { ThemeProvider } from '@material-ui/core/styles';
+import { shape, string } from 'prop-types';
+import { connect } from 'react-redux';
 
-import theme from '../styles/muiTheme';
-import { WalletsPlaceholder } from './screens';
+import { Auth, WalletsPlaceholder } from './screens';
 
-export default function App() {
-  return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <WalletsPlaceholder />
-    </ThemeProvider>
-  );
+function App({ user }) {
+  if (!user) return <Auth />;
+  return <WalletsPlaceholder />;
 }
+
+App.propTypes = {
+  user: shape({
+    name: string.isRequired,
+  }),
+};
+
+App.defaultProps = {
+  user: null,
+};
+
+const mapStateToProps = ({ user }) => ({
+  user,
+});
+
+export default connect(mapStateToProps, null)(App);

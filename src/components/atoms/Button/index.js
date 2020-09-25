@@ -1,5 +1,10 @@
 import React from 'react';
-import { bool, node, string } from 'prop-types';
+import {
+  bool,
+  func,
+  node,
+  string,
+} from 'prop-types';
 import { Button as MuiButton } from '@material-ui/core';
 
 export default function Button({
@@ -7,6 +12,7 @@ export default function Button({
   color,
   customization,
   disabled,
+  handleClick,
   type,
   variant,
 }) {
@@ -15,6 +21,7 @@ export default function Button({
       className={customization}
       color={color}
       disabled={disabled}
+      onClick={handleClick}
       type={type}
       variant={variant}
     >
@@ -28,6 +35,7 @@ Button.propTypes = {
   color: string,
   customization: string,
   disabled: bool,
+  handleClick: func,
   type: string,
   variant: string,
 };
@@ -37,6 +45,7 @@ Button.defaultProps = {
   color: 'default',
   customization: null,
   disabled: false,
+  handleClick: null,
   type: 'button',
   variant: 'text',
 };
