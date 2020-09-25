@@ -1,9 +1,15 @@
 import React from 'react';
-import { func, node, string } from 'prop-types';
+import {
+  bool,
+  func,
+  node,
+  string,
+} from 'prop-types';
 import { TextField as MuiTextField } from '@material-ui/core';
 
 export default function TextField({
   customization,
+  disabled,
   handleBlur,
   handleChange,
   label,
@@ -15,6 +21,7 @@ export default function TextField({
   return (
     <MuiTextField
       className={customization}
+      disabled={disabled}
       label={label}
       name={name}
       onBlur={handleBlur}
@@ -28,6 +35,7 @@ export default function TextField({
 
 TextField.propTypes = {
   customization: string,
+  disabled: bool,
   handleBlur: func,
   handleChange: func,
   label: string,
@@ -39,6 +47,7 @@ TextField.propTypes = {
 
 TextField.defaultProps = {
   customization: null,
+  disabled: false,
   handleBlur: null,
   handleChange: null,
   label: null,
