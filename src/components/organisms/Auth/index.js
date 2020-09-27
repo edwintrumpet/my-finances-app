@@ -25,10 +25,10 @@ const initialValues = {
 const validationObject = {
   email: Yup.string().required('El email es obligatorio').email('El formato del email es inválido'),
   password: Yup.string().required('La contraseña es obligatoria')
-    .min(8, 'La contraseña debe contener al menos 8 caracteres')
-    .matches(/(.)*(\d)+(.)*/, 'La contraseña debe contener al menos un número')
-    .matches(/(.)*[A-Z]+(.)*/, 'La contraseña debe contener al menos una letra mayúscula')
-    .matches(/(.)*[a-z]+(.)*/, 'La contraseña debe contener al menos una letra minúscula'),
+    .min(8, 'Contraseña de mínimo 8 caracteres')
+    .matches(/(.)*(\d)+(.)*/, 'Al menos un número en la contraseña')
+    .matches(/(.)*[A-Z]+(.)*/, 'Al menos una mayúscula en contraseña')
+    .matches(/(.)*[a-z]+(.)*/, 'Al menos una minúscula en contraseña'),
 };
 
 export default function Auth({ islogin, style, toggleauth }) {
@@ -38,7 +38,7 @@ export default function Auth({ islogin, style, toggleauth }) {
   if (!islogin) {
     initialValues.name = '';
     initialValues.confirmPassword = '';
-    validationObject.name = Yup.string().required('El nombre es obligatorio').min(4, 'El nombre debe tener al menos 4 caracteres');
+    validationObject.name = Yup.string().required('El nombre es obligatorio').min(4, 'Nombre de mínimo 4 caracteres');
     validationObject.confirmPassword = Yup.string().required('Debes confirmar tu contraseña');
   } else if (validationObject.name) {
     delete initialValues.name;
