@@ -17,12 +17,12 @@ import {
 import FormCard from '../FormCard';
 import useStyles from './styles';
 
-const initialValues = {
+let initialValues = {
   email: '',
   password: '',
 };
 
-const validationObject = {
+let validationObject = {
   email: Yup.string().required('El email es obligatorio').email('El formato del email es inválido'),
   password: Yup.string().required('La contraseña es obligatoria')
     .min(8, 'Contraseña de mínimo 8 caracteres')
@@ -36,10 +36,16 @@ export default function Auth({ islogin, style, toggleauth }) {
   const [showPassword, setShowPassword] = useState(false);
 
   if (!islogin) {
-    initialValues.name = '';
-    initialValues.confirmPassword = '';
-    validationObject.name = Yup.string().required('El nombre es obligatorio').min(4, 'Nombre de mínimo 4 caracteres');
-    validationObject.confirmPassword = Yup.string().required('Debes confirmar tu contraseña');
+    initialValues = {
+      name: '',
+      confirmPassword: '',
+      ...initialValues,
+    };
+    validationObject = {
+      name: Yup.string().required('El nombre es obligatorio').min(4, 'Nombre de mínimo 4 caracteres'),
+      confirmPassword: Yup.string().required('Debes confirmar tu contraseña'),
+      ...validationObject,
+    };
   } else if (validationObject.name) {
     delete initialValues.name;
     delete initialValues.confirmPassword;
